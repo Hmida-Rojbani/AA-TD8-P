@@ -1,0 +1,46 @@
+PROCEDURE BackTrackI(i, VAR q:BOOLEAN)
+VAR
+    Intialiser la sélection
+    q := FALSE
+BEGIN
+    REPEAT
+        choisir un déplacement
+        IF (acceptable) THEN
+            enregistere ce déplacement
+            IF (solution incompléte) THEN
+                BackTrackI(Succ(i), q)
+                IF (q = FALSE) THEN
+                    efface le déplacement
+                END_IF
+            ELSE
+                q := TRUE
+            END_IF
+        END_IF
+    UNTIL (q = TRUE OR plus de déplacement)
+END
+
+//  dx = [ -2 -2  -1 -1  1 1  2 2 ]
+//  dy = [ -1  1  -2  2 -2 2 -1 1 ]
+//  S[1..N][1..N]  == échiquier
+PROCEDURE cavalier(i : INTEGER, VAR q:BOOLEAN, x:INTEGER , y :INTEGER)
+VAR
+    j := 0
+    q := FALSE
+BEGIN
+    REPEAT
+        j := j + 1
+        u := x + dx[j]
+        v := y + dy[j]
+        IF (u >= 1 AND u <= N AND v >= 1 AND v <= N AND S[u][v] = 0) THEN
+            S[u][v] := i
+            IF (i < (N*N) -1) THEN
+                cavalier(i + 1, q, u , v)
+                IF (q = FALSE) THEN
+                   S[u][v] := 0
+                END_IF
+            ELSE
+                q := TRUE
+            END_IF
+        END_IF
+    UNTIL (q = TRUE OR j > 8)
+END
