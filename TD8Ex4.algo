@@ -6,17 +6,24 @@
 
 PROCEDURE Somme(i)
 VAR
-    set_declarations
+    sum := 0
+   
 BEGIN
-    FOR i FROM min TO max STEP step  DO // tous les condidats
-        IF (acceptable) THEN
-            enregister le coup
-            IF (solution incompléte) THEN
-                Somme (Succ(i))
+    FOR j FROM 1 TO N  DO // tous les condidats
+        IF (sum + W[j] <= M AND select[j] := FALSE AND i <> N) THEN
+            S[i] := W[j]
+            select[j] := TRUE
+            sum := sum + W[j]
+            IF (sum < M) THEN
+                Somme (i+1)
             ELSE
-                Afficher la solution
+                FOR k FROM 1 TO i  DO
+                    ecrire(S[k])
+                END_FOR
             END_IF
-            effacer le coup
+            S[i] := 0
+            select[j] := FALSE
+            sum := sum - W[j]
         END_IF
     END_FOR
 END
