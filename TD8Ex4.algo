@@ -1,0 +1,22 @@
+// Backtrack 2
+// N nb d'entier positifs
+// W[1..N] les èlements , W[i ] <=W[i+1]
+// S[1..N] contien les elements choisis vaut M
+// selection selct[i] = vrai W[i] est sèlection
+
+PROCEDURE Somme(i)
+VAR
+    set_declarations
+BEGIN
+    FOR i FROM min TO max STEP step  DO // tous les condidats
+        IF (acceptable) THEN
+            enregister le coup
+            IF (solution incompléte) THEN
+                Somme (Succ(i))
+            ELSE
+                Afficher la solution
+            END_IF
+            effacer le coup
+        END_IF
+    END_FOR
+END
