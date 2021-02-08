@@ -1,0 +1,42 @@
+// Coloriage de Graphe
+// G[1..N][1..N]  
+// G[i][j] = 1 si l'existe arret entre i et j, 0 sinon.
+// S[1..N] = c, le coleur choisie tq 1<= c <= m, 0 sinon
+// m coleurs
+PROCEDURE Coloriage(i : INTEGER, m: INTEGER, VAR q:BOOLEAN) // i est conteur sur les noeuds 
+VAR
+    c :INTEGER := 0
+    q := FALSE
+BEGIN
+    REPEAT
+        c := c + 1
+        IF (acceptable_coleur(i,c)) THEN  // S[1..4] =  0 0 0 0 
+            S[i] := c
+            IF (i < N) THEN
+                Coloriage(i + 1, m, q)
+                IF (q = FALSE) THEN
+                    S[i] := 0
+                END_IF
+            ELSE
+                q := TRUE
+            END_IF
+        END_IF
+    UNTIL (q = TRUE OR c = m)
+END
+
+FUNCTION acceptable_coleur(i,c) : BOOLEAN
+VAR
+    accept : BOOLEAN
+    j : INTEGER
+BEGIN
+    accept := TRUE
+    j := 1
+    WHILE (j < i AND accept) DO
+        IF (G[i][j] = 1 AND S[j] = c ) THEN
+            accept := false
+        ELSE
+            j := j+1
+        END_IF
+    END_WHILE
+    RETURN accept ;
+END
