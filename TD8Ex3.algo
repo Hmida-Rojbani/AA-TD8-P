@@ -1,0 +1,18 @@
+// Backtrack2
+PROCEDURE cycle_hamiltonien(i)
+VAR
+    intialisation
+BEGIN
+    FOR  tous les candidats  DO
+        choisir un candidat
+        IF acceptable THEN
+            enregister le coups
+            IF sol incomplete THEN 
+               cycle_hamiltonien(Succ(i))  
+            ELSE
+                Afficher solution
+            END_IF
+            effacer enregistereent
+        END_IF
+    END_FOR
+END
