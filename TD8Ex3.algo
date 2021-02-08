@@ -1,18 +1,26 @@
 // Backtrack2
+// G[1..N][1..N]  
+// G[i][j] = vrai si l'existe arret entre i et j, faux sinon.
+// S[1..N] parcours des noeuds , S[i] represente l'indice du ième sommet du cycle
+// V[1..N] boolean , les noeuds visitès ou non, par defaut V[1] = TRUE
 PROCEDURE cycle_hamiltonien(i)
 VAR
-    intialisation
+
 BEGIN
-    FOR  tous les candidats  DO
-        choisir un candidat
-        IF acceptable THEN
-            enregister le coups
-            IF sol incomplete THEN 
-               cycle_hamiltonien(Succ(i))  
+    FOR  j FROM 2 TO N DO
+        S[i] := 0
+        IF G[S[i-1]][j] = TRUE AND V[j] = FALSE AND (i <> N ou G[j][1] = TRUE) THEN
+            S[i] := j
+            V[j] := TRUE
+            IF i < N THEN 
+               cycle_hamiltonien(i+1)  
             ELSE
-                Afficher solution
+                FOR k FROM 1 TO N  DO
+                    ecrire(S[k])
+                END_FOR
             END_IF
-            effacer enregistereent
+            S[i] := 0
+            V[j] := FALSE
         END_IF
     END_FOR
 END
